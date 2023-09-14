@@ -13,14 +13,16 @@
     <div class="container">
         <nav>
            <img src="images/logo.png" class="logo"> 
-           <ul>
-            <li><a href="">Home</a></li>
-            <li><a href="">About</a></li>
-            <li><a href="">Skills</a></li>
-            <li><a href="">Projects</a></li>
-            <li><a href="">Certifications</a></li>
-            <li><a href="">Contact</a></li>
+           <ul id="sidemenu">
+            <li><a href="#header">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#Skills">Skills</a></li>
+            <li><a href="#Projects">Projects</a></li>
+            <li><a href="#">Certifications</a></li>
+            <li><a href="#Contact">Contact</a></li>
+            <i class="fa-regular fa-circle-xmark ic" onclick="closemenu()"></i>
            </ul>
+           <i class="fa-solid fa-bars ic" onclick="openmenu()"></i>
         </nav>
         <div class="header-text">
             <p>Frontend Developer</p>
@@ -52,9 +54,9 @@
                 </div>
                 <div class="tab-contents active-tab" id="links">
                     <ul>
-                        <li><span>Hackerrank</span><br>Showcasing my Skills</li>
-                        <li><span>Kaggle</span><br>Showcasing my Skills</li>
-                        <li><span>GitHub</span><br><a href="">https://github.com/Garv44</a></li>
+                        <li><span>Hackerrank</span><br><a href="https://www.hackerrank.com/chaplot_garv"><p>chaplot_garv</p></a></li>
+                        <li><span>Kaggle</span><br><a href="https://www.kaggle.com/garvchaplot"><p>garvchaplot</p></a></li>
+                        <li><span>GitHub</span><br><a href="https://github.com/Garv44"><p>Garv44</p></a></li>
                     </ul>
                 </div>
                 <div class="tab-contents" id="experience">
@@ -244,7 +246,7 @@
                 </div>
             </div>
             <div class="contact-right">
-                <form>
+                <form name="submit-to-google-sheet">
                     <input type="text" name="Name" placeholder="Your Name" required>
                     <input type="text" name="E-mail" placeholder="Your E-mail" required>
                     <textarea name="Message" rows="6" placeholder="Your Message" required></textarea>
@@ -271,7 +273,26 @@
         event.currentTarget.classList.add("active");
         document.getElementById(tabname).classList.add("active-tab");
     }
+
+    var sidemenu = document.getElementById("sidemenu")
+    function openmenu(){
+        sidemenu.style.right = "0";
+    }
+    function closemenu(){
+        sidemenu.style.right = "-200px";
+    }
 </script>
+<script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyvRLUmu-lJw-yrQdIR8piM7mJpQZHS-GecHnhoMWGC8wBCAEAt71xhQbJSqNisFIYVAw/exec'
+    const form = document.forms['submit-to-google-sheet']
+  
+    form.addEventListener('submit', e => {
+      e.preventDefault()
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response => console.log('Success!', response))
+        .catch(error => console.error('Error!', error.message))
+    })
+  </script>
     
 </body>
 </html>
